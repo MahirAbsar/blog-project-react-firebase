@@ -8,7 +8,9 @@ import CreateBlog from './pages/CreateBlog'
 import { auth } from './firebase-config'
 import { signOut } from 'firebase/auth'
 function App() {
-  const [isAuth, setIsAuth] = useState(false)
+  const [isAuth, setIsAuth] = useState(
+    JSON.parse(localStorage.getItem('isAuth'))
+  )
   const logout = () => {
     signOut(auth).then(() => {
       localStorage.clear()
@@ -30,7 +32,7 @@ function App() {
           )}
         </Wrapper>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home isAuth={isAuth} />} />
           <Route path='/create' element={<CreateBlog isAuth={isAuth} />} />
           <Route path='/login' element={<Login setIsAuth={setIsAuth} />} />
         </Routes>
