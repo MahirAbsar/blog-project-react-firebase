@@ -20,16 +20,18 @@ function App() {
       <Router>
         <Wrapper>
           <Link to='/'>Home</Link>
-          <Link to='/create'>Create Blog</Link>
           {!isAuth ? (
             <Link to='/login'>Login</Link>
           ) : (
-            <button onClick={logout}>Log Out</button>
+            <>
+              <Link to='/create'>Create Blog</Link>
+              <button onClick={logout}>Log Out</button>
+            </>
           )}
         </Wrapper>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/create' element={<CreateBlog />} />
+          <Route path='/create' element={<CreateBlog isAuth={isAuth} />} />
           <Route path='/login' element={<Login setIsAuth={setIsAuth} />} />
         </Routes>
       </Router>
